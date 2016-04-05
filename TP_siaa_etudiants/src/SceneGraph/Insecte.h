@@ -7,39 +7,43 @@
 #include <SceneGraph/Group.h>
 #include <SceneGraph/Scale.h>
 #include <SceneGraph/Translate.h>
+#include <SceneGraph/Rotate.h>
 #include <Math/Vectorf.h>
 
 namespace SceneGraph
 {
-	class Insecte : public NodeInterface
+	class Insecte : public Group
 	{
 	private:
-		Group m_root ;
-		
-		Sphere *m_sphereBody;
+		Translate *m_rootTranslate;
+		Rotate *m_rootRotate;
+
+		Sphere *m_body;
 		Scale *m_scaleBody;
 
-		Sphere *m_sphereWingR;
-		Sphere *m_sphereWingL;
-		Scale *m_scaleWingR;
-		Scale *m_scaleWingL;
+		Sphere *m_wing;
+		Scale *m_scaleWing;
 		Translate *m_translateWingR;
 		Translate *m_translateWingL;
 
-		Sphere *m_sphereEyeR;
-		Sphere *m_sphereEyeL;
-		Scale *m_scaleEyeR;
-		Scale *m_scaleEyeL;
+		Sphere *m_eye;
+		Scale *m_scaleEye;
 		Translate *m_translateEyeR;
 		Translate *m_translateEyeL;
 
+		float m_speed;
+
 	public:
-		Insecte(void);
+		Insecte(float speed = 1.0f);
 		~Insecte(void);
 
-		SceneGraph::Group * getSceneGraph();
+		void createSkeleton(void);
 
-		virtual void draw();
+		void translateLocal(Math::Vector3f translation);
+
+		void rotateLocal(float angle, Math::Vector3f axis);
+
+		float getSpeed(void);
 	};
 }
 

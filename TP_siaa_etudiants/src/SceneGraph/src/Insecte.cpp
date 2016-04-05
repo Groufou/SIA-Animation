@@ -1,98 +1,106 @@
 #include "..\Insecte.h"
 
 
-SceneGraph::Insecte::Insecte(void)
+SceneGraph::Insecte::Insecte(float speed) :
+	m_speed(speed)
 {
-	// TODO SCENEGRAPH : Tout mettre sous le translate du body
+	// Insecte Root
+	m_rootTranslate = new Translate();
+	m_rootRotate = new Rotate(1.5f, Math::makeVector(0.0f, 0.0f, 1.0f));
+
 
 	// Insect Body
-	HelperGl::Material sphereMatBody;
-	HelperGl::Color sphereColorBody(0.0,0.6,0.4);
-	sphereMatBody.setDiffuse(sphereColorBody);
+	HelperGl::Material matBody;
+	matBody.setDiffuse(HelperGl::Color(0.0, 0.6, 0.4));
 	
-	m_sphereBody = new SceneGraph::Sphere(sphereMatBody);
-	
-	m_scaleBody = new SceneGraph::Scale(Math::makeVector(1.0f, 0.3f, 0.3f));
-	m_scaleBody->addSon(m_sphereBody);
+	m_body = new Sphere(matBody);
+	m_scaleBody = new Scale(Math::makeVector(1.0f, 0.3f, 0.3f));
 
-	m_root.addSon(m_scaleBody);	
 
 	// Insect Wings
-	HelperGl::Material sphereMatWing;
-	HelperGl::Color sphereColorDiffuseWing(0.4,0.2,0.4);
-	HelperGl::Color sphereColorSpecularWing(1.0,1.0,1.0);
-	sphereMatWing.setDiffuse(sphereColorDiffuseWing);
-	sphereMatWing.setSpecular(sphereColorSpecularWing);
+	HelperGl::Material matWing;
+	matWing.setDiffuse(HelperGl::Color(0.4, 0.2, 0.4));
+	matWing.setSpecular(HelperGl::Color(1.0, 1.0, 1.0));
 	
-	m_sphereWingR = new SceneGraph::Sphere(sphereMatWing);
-	m_sphereWingL = new SceneGraph::Sphere(sphereMatWing);
+	m_wing = new SceneGraph::Sphere(matWing);
 	
-	m_scaleWingR = new SceneGraph::Scale(Math::makeVector(0.3f, 0.3f, 0.05f));
-	m_scaleWingL = new SceneGraph::Scale(Math::makeVector(0.3f, 0.3f, 0.05f));
-	m_scaleWingR->addSon(m_sphereWingR);
-	m_scaleWingL->addSon(m_sphereWingL);
+	m_scaleWing = new SceneGraph::Scale(Math::makeVector(0.3f, 0.3f, 0.05f));
 
 	m_translateWingR = new SceneGraph::Translate(Math::makeVector(0.0f, 0.6f, 0.0f));
 	m_translateWingL = new SceneGraph::Translate(Math::makeVector(0.0f, -0.6f, 0.0f));
-	m_translateWingR->addSon(m_scaleWingR);
-	m_translateWingL->addSon(m_scaleWingL);
-
-	m_root.addSon(m_translateWingR);
-	m_root.addSon(m_translateWingL);
+	
 
 	// Insect Eyes
-	HelperGl::Material sphereMatEye;
-	HelperGl::Color sphereColorDiffuseEye(0.4,0.4,0.2);
-	HelperGl::Color sphereColorSpecularEye(1.0,1.0,1.0);
-	sphereMatEye.setDiffuse(sphereColorDiffuseEye);
-	sphereMatEye.setSpecular(sphereColorSpecularEye);
+	HelperGl::Material matEye;
+	matEye.setDiffuse(HelperGl::Color(0.4, 0.4, 0.2));
+	matEye.setSpecular(HelperGl::Color(1.0, 1.0, 1.0));
 	
-	m_sphereEyeR = new SceneGraph::Sphere(sphereMatEye);
-	m_sphereEyeL = new SceneGraph::Sphere(sphereMatEye);
+	m_eye = new SceneGraph::Sphere(matEye);
 	
-	m_scaleEyeR = new SceneGraph::Scale(Math::makeVector(0.05f, 0.05f, 0.05f));
-	m_scaleEyeL = new SceneGraph::Scale(Math::makeVector(0.05f, 0.05f, 0.05f));
-	m_scaleEyeR->addSon(m_sphereEyeR);
-	m_scaleEyeL->addSon(m_sphereEyeL);
+	m_scaleEye = new SceneGraph::Scale(Math::makeVector(0.05f, 0.05f, 0.05f));
 
 	m_translateEyeR = new SceneGraph::Translate(Math::makeVector(0.7f, 0.2f, 0.2f));
 	m_translateEyeL = new SceneGraph::Translate(Math::makeVector(0.7f, -0.2f, 0.2f));
-	m_translateEyeR->addSon(m_scaleEyeR);
-	m_translateEyeL->addSon(m_scaleEyeL);
 	
-	m_root.addSon(m_translateEyeR);
-	m_root.addSon(m_translateEyeL);
+
+	// Generate Insecte's scene graph
+	this->createSkeleton();
 }
 
 
 SceneGraph::Insecte::~Insecte(void)
 {
-	delete m_sphereBody;
+	delete m_body;
 	delete m_scaleBody;
 
-	delete m_sphereWingR;
-	delete m_sphereWingL;
-	delete m_scaleWingR;
-	delete m_scaleWingL;
+	delete m_wing;
+	delete m_scaleWing;
 	delete m_translateWingR;
 	delete m_translateWingL;
 
-	delete m_sphereEyeR;
-	delete m_sphereEyeL;
-	delete m_scaleEyeR;
-	delete m_scaleEyeL;
+	delete m_eye;
+	delete m_scaleEye;
 	delete m_translateEyeR;
 	delete m_translateEyeL;
 }
 
-
-SceneGraph::Group * SceneGraph::Insecte::getSceneGraph()
+void SceneGraph::Insecte::createSkeleton(void)
 {
-	return &m_root;
+	// Insect Root
+	this->addSon(m_rootTranslate);
+	m_rootTranslate->addSon(m_rootRotate);
+
+	// Insect Body
+	m_scaleBody->addSon(m_body);
+	m_rootRotate->addSon(m_scaleBody);
+
+	// Insect Wings
+	m_scaleWing->addSon(m_wing);
+	m_translateWingR->addSon(m_scaleWing);
+	m_translateWingL->addSon(m_scaleWing);
+	m_rootRotate->addSon(m_translateWingR);
+	m_rootRotate->addSon(m_translateWingL);
+
+	// Insect Eyes
+	m_scaleEye->addSon(m_eye);
+	m_translateEyeR->addSon(m_scaleEye);
+	m_translateEyeL->addSon(m_scaleEye);
+	m_rootRotate->addSon(m_translateEyeR);
+	m_rootRotate->addSon(m_translateEyeL);
 }
 
-
-void SceneGraph::Insecte::draw()
+void SceneGraph::Insecte::translateLocal(Math::Vector3f translation)
 {
-	m_root.draw();
+	m_rootTranslate->setTranslation(m_rootTranslate->getTranslation() + translation);
+}
+
+void SceneGraph::Insecte::rotateLocal(float angle, Math::Vector3f axis)
+{
+	m_rootRotate->setAxis(axis);
+	m_rootRotate->setAngle(m_rootRotate->getAngle() + angle);
+}
+
+float SceneGraph::Insecte::getSpeed(void)
+{
+	return m_speed;
 }

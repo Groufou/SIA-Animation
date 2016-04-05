@@ -31,7 +31,7 @@ namespace Application
 			float rotationSpeed = float(Math::pi/2.0) ;
 
 			// quit
-			if(m_keyboard.isPressed('q')) { quit() ; }
+			if(m_keyboard.isPressed('p')) { quit() ; }
 			// Go front
 			if(m_keyboard.isPressed('+')) { m_camera.translateLocal(Math::makeVector(0.0f,0.0f,-cameraSpeed*(float)getDt())) ; } 
 			// Go back
@@ -44,12 +44,23 @@ namespace Application
 			if(m_keyboard.isPressed('2')) { m_camera.translateLocal(Math::makeVector(0.0f,-cameraSpeed*(float)getDt(),0.0f)) ; }
 			// Go up
 			if(m_keyboard.isPressed('5')) { m_camera.translateLocal(Math::makeVector(0.0f,(float)cameraSpeed*(float)getDt(),0.0f)) ; }
+		
+			// Musquito right
+			if(m_keyboard.isPressed('z')) { m_musquito->translateLocal(Math::makeVector(m_musquito->getSpeed()*(float)getDt(), 0.0f, 0.0f)); }
+			// Musquito left
+			if(m_keyboard.isPressed('s')) { m_musquito->translateLocal(Math::makeVector(-m_musquito->getSpeed()*(float)getDt(), 0.0f, 0.0f)); }
+			// Musquito up
+			if (m_keyboard.isPressed('q')) {
+				//m_musquito->translateLocal(Math::makeVector(0.0f, m_musquito->getSpeed()*(float)getDt(), 0.0f)); 
+				m_musquito->rotateLocal(1.0f*(float)getDt(), Math::makeVector(0.0f, 0.0f, 1.0f));
+			}
+			// Musquito down
+			if (m_keyboard.isPressed('d')) { m_musquito->translateLocal(Math::makeVector(0.0f, -m_musquito->getSpeed()*(float)getDt(), 0.0f)); }
 		}
 
 	public:
 		TP1_siaa()
-		{
-		}
+		{}
 
 		virtual void initializeRendering()
 		{
@@ -60,9 +71,9 @@ namespace Application
 			HelperGl::LightServer::Light * light = HelperGl::LightServer::getSingleton()->createLight(lightPosition.popBack(), lightColor, lightColor, lightColor) ;
 			light->enable();
 
-			m_musquito = new SceneGraph::Insecte();
+			m_musquito = new SceneGraph::Insecte(3.0f);
 
-			m_root.addSon(m_musquito->getSceneGraph());
+			m_root.addSon(m_musquito);
 		}
 
 		virtual void render(double dt)

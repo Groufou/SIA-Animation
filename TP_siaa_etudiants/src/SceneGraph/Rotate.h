@@ -3,6 +3,7 @@
 
 #include <SceneGraph/Transform.h>
 #include <Math/Vectorf.h>
+#include <Math/Constant.h>
 
 namespace SceneGraph
 {
@@ -35,7 +36,7 @@ namespace SceneGraph
 		virtual void draw() 
 		{
 			storeMatrix() ;
-			glRotatef((float)(m_angle*180.0/Math::pi, m_axis[0], m_axis[1], m_axis[2]) ;
+			glRotatef((float)(m_angle*180.0/Math::pi), m_axis[0], m_axis[1], m_axis[2]) ;
 			Group::draw() ;
 			restoreMatrix() ;
 		}
