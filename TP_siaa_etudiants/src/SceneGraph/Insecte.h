@@ -23,6 +23,10 @@ namespace SceneGraph
 
 		Sphere *m_wing;
 		Scale *m_scaleWing;
+		Translate *m_translateAxeWingR;
+		Translate *m_translateAxeWingL;
+		Rotate *m_rotateWingR;
+		Rotate *m_rotateWingL;
 		Translate *m_translateWingR;
 		Translate *m_translateWingL;
 
@@ -32,6 +36,10 @@ namespace SceneGraph
 		Translate *m_translateEyeL;
 
 		float m_speed;
+
+		bool m_upDownWing;
+		float m_maxAngleWing;
+		float m_minAngleWing;
 
 	public:
 		Insecte(float speed = 1.0f);
@@ -44,6 +52,12 @@ namespace SceneGraph
 		void rotateLocal(float angle, Math::Vector3f axis);
 
 		float getSpeed(void);
+		void setSpeed(float speed);
+
+		void animateLocal(float dt);
+
+	protected:
+		void animateWings(float dt);
 	};
 }
 
