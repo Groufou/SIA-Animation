@@ -59,7 +59,7 @@ namespace Application
 			HelperGl::LightServer::Light * light = HelperGl::LightServer::getSingleton()->createLight(lightPosition.popBack(), lightColor, lightColor, lightColor) ;
 			light->enable();
 
-			m_musquito = new SceneGraph::Insecte(5.0f);
+			m_musquito = new SceneGraph::Insecte(1.0f);
 
 			m_root.addSon(m_musquito);
 		}
