@@ -55,7 +55,7 @@ namespace Application
 			// Light
 			HelperGl::Color lightColor(1.0,1.0,1.0);
 			HelperGl::Color lightAmbiant(0.0,0.0,0.0,0.0);
-			Math::Vector4f lightPosition = Math::makeVector(0.0f,0.0f,10000.0f,1.0f) ; // Point light centered in 0,0,0
+			Math::Vector4f lightPosition = Math::makeVector(0.0f,0.0f,10000.0f,1.0f) ;
 			HelperGl::LightServer::Light * light = HelperGl::LightServer::getSingleton()->createLight(lightPosition.popBack(), lightColor, lightColor, lightColor) ;
 			light->enable();
 
