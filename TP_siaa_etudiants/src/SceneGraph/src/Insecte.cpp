@@ -13,12 +13,12 @@ SceneGraph::Insecte::Insecte(float speed) :
 
 
 	// Insect Body
-	HelperGl::Loader3ds body("../../../INSECTE/Insecte.3ds","../../../INSECTE/mat.bmp");
+	//HelperGl::Loader3ds body("../../../INSECTE/Insecte.3ds","../../../INSECTE/mat.bmp");
 	HelperGl::Material matBody;
-	//matBody.setDiffuse(HelperGl::Color(0.0, 0.6, 0.4));
+	matBody.setDiffuse(HelperGl::Color(0.0, 0.6, 0.4));
 
-	//m_body = new Sphere(matBody);
-	m_body3ds = new HelperGl::Loader3ds("../../../INSECTE/Insecte.3ds", "../../../INSECTE/mat.bmp");
+	m_body = new Sphere(matBody);
+	//m_body3ds = new HelperGl::Loader3ds("../../../INSECTE/Insecte.3ds", "../../../INSECTE/mat.bmp");
 	m_scaleBody = new Scale(Math::makeVector(1.0f, 0.3f, 0.3f));
 
 
@@ -87,8 +87,8 @@ void SceneGraph::Insecte::createSkeleton(void)
 	m_rootTranslate->addSon(m_rootRotate);
 
 	// Insect Body
-	//m_scaleBody->addSon(m_body);
-	m_scaleBody->addSon(m_body3ds->getMeshes() );
+	m_scaleBody->addSon(m_body);
+	//m_scaleBody->addSon(m_body3ds->getMeshes() );
 	m_rootRotate->addSon(m_scaleBody);
 
 	// Insect Wings
