@@ -13,12 +13,17 @@ SceneGraph::Insecte::Insecte(float speed) :
 
 
 	// Insect Body
-	//HelperGl::Loader3ds body("../../../INSECTE/Insecte.3ds","../../../INSECTE/mat.bmp");
+
 	HelperGl::Material matBody;
 	matBody.setDiffuse(HelperGl::Color(0.0, 0.6, 0.4));
 
 	m_body = new Sphere(matBody);
-	//m_body3ds = new HelperGl::Loader3ds("../../../INSECTE/Insecte.3ds", "../../../INSECTE/mat.bmp");
+
+	//m_body3ds = new HelperGl::Loader3ds("../../../INSECTE/Insecte.3DS", "../../../INSECTE/textures");
+	//m_body3ds = new HelperGl::Loader3ds("~/Users/vincent/Documents/ESIR/SIA-Animation/SIA-Animation/INSECTE/Insecte.3DS",
+	//	"~/Users/vincent/Documents/ESIR/SIA-Animation/SIA-Animation/INSECTE/textures/");
+	//m_bodyMesh = new MeshVBO_v2(m_body3ds->getMeshes()[0]);
+
 	m_scaleBody = new Scale(Math::makeVector(1.0f, 0.3f, 0.3f));
 
 
@@ -63,6 +68,7 @@ SceneGraph::Insecte::~Insecte(void)
 {
 	delete m_body;
 	delete m_body3ds;
+	delete m_bodyMesh;
 	delete m_scaleBody;
 
 	delete m_wing;
@@ -88,7 +94,8 @@ void SceneGraph::Insecte::createSkeleton(void)
 
 	// Insect Body
 	m_scaleBody->addSon(m_body);
-	//m_scaleBody->addSon(m_body3ds->getMeshes() );
+	//m_scaleBody->addSon(m_bodyMesh);
+
 	m_rootRotate->addSon(m_scaleBody);
 
 	// Insect Wings
@@ -146,7 +153,7 @@ void SceneGraph::Insecte::animateWings(float dt)
 		m_upDownWing = true;
 
 	// Generate smooth rotation angle
-	float angle = 0;
+	double angle = 0;
 	if (m_rotateWingL->getAngle() > 0)
 		angle = m_speed*dt*(m_maxAngleWing + 0.3 - m_rotateWingL->getAngle());
 	else
