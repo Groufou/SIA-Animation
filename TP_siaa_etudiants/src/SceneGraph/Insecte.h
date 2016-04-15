@@ -9,6 +9,9 @@
 #include <SceneGraph/Translate.h>
 #include <SceneGraph/Rotate.h>
 #include <Math/Vectorf.h>
+#include <HelperGl/Loader3ds.h>
+#include <SceneGraph/Mesh.h>
+#include <SceneGraph/MeshVBO_v2.h>
 
 namespace SceneGraph
 {
@@ -19,6 +22,8 @@ namespace SceneGraph
 		Rotate *m_rootRotate;
 
 		Sphere *m_body;
+		HelperGl::Loader3ds *m_body3ds;
+		MeshVBO_v2 *m_bodyMesh;
 		Scale *m_scaleBody;
 
 		Sphere *m_wing;
