@@ -108,6 +108,9 @@
     <ClCompile Include="..\src\SceneGraph\src\Insecte.cpp">
       <Filter>src\SceneGraph\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Animation\src\HermiteSpline.cpp">
+      <Filter>src\Animation\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Math\Vector.h">
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="..\src\SceneGraph\Insecte.h">
       <Filter>src\SceneGraph</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Animation\HermiteSpline.h">
+      <Filter>src\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,22 +8,15 @@ SceneGraph::Insecte::Insecte(float speed) :
 	m_upDownWing(true)
 {
 	// Insecte Root
-	m_rootTranslate = new Translate(Math::makeVector(0.0f, 0.0f, -3.0f));
+	m_rootTranslate = new Translate(Math::makeVector(0.0f, 0.0f, 0.0f));
 	m_rootRotate = new Rotate(0.0f, Math::makeVector(0.0f, 0.0f, 0.0f));
 
 
 	// Insect Body
-
 	HelperGl::Material matBody;
 	matBody.setDiffuse(HelperGl::Color(0.0, 0.6, 0.4));
-
+	
 	m_body = new Sphere(matBody);
-
-	//m_body3ds = new HelperGl::Loader3ds("../../../INSECTE/Insecte.3DS", "../../../INSECTE/textures");
-	//m_body3ds = new HelperGl::Loader3ds("~/Users/vincent/Documents/ESIR/SIA-Animation/SIA-Animation/INSECTE/Insecte.3DS",
-	//	"~/Users/vincent/Documents/ESIR/SIA-Animation/SIA-Animation/INSECTE/textures/");
-	//m_bodyMesh = new MeshVBO_v2(m_body3ds->getMeshes()[0]);
-
 	m_scaleBody = new Scale(Math::makeVector(1.0f, 0.3f, 0.3f));
 
 
@@ -67,8 +60,6 @@ SceneGraph::Insecte::Insecte(float speed) :
 SceneGraph::Insecte::~Insecte(void)
 {
 	delete m_body;
-	delete m_body3ds;
-	delete m_bodyMesh;
 	delete m_scaleBody;
 
 	delete m_wing;
@@ -90,31 +81,29 @@ void SceneGraph::Insecte::createSkeleton(void)
 {
 	// Insect Root
 	this->addSon(m_rootTranslate);
-	m_rootTranslate->addSon(m_rootRotate);
+		m_rootTranslate->addSon(m_rootRotate);
+			m_rootRotate->addSon(m_scaleBody);
+			m_rootRotate->addSon(m_translateAxeWingR);
+			m_rootRotate->addSon(m_translateAxeWingL);
+			m_rootRotate->addSon(m_translateEyeR);
+			m_rootRotate->addSon(m_translateEyeL);
 
 	// Insect Body
 	m_scaleBody->addSon(m_body);
-	//m_scaleBody->addSon(m_bodyMesh);
-
-	m_rootRotate->addSon(m_scaleBody);
 
 	// Insect Wings
-	m_scaleWing->addSon(m_wing);
-	m_translateWingR->addSon(m_scaleWing);
-	m_translateWingL->addSon(m_scaleWing);
-	m_rotateWingR->addSon(m_translateWingR);
-	m_rotateWingL->addSon(m_translateWingL);
 	m_translateAxeWingR->addSon(m_rotateWingR);
 	m_translateAxeWingL->addSon(m_rotateWingL);
-	m_rootRotate->addSon(m_translateAxeWingR);
-	m_rootRotate->addSon(m_translateAxeWingL);
+		m_rotateWingR->addSon(m_translateWingR);
+		m_rotateWingL->addSon(m_translateWingL);
+			m_translateWingR->addSon(m_scaleWing);
+			m_translateWingL->addSon(m_scaleWing);
+				m_scaleWing->addSon(m_wing);
 
 	// Insect Eyes
-	m_scaleEye->addSon(m_eye);
 	m_translateEyeR->addSon(m_scaleEye);
 	m_translateEyeL->addSon(m_scaleEye);
-	m_rootRotate->addSon(m_translateEyeR);
-	m_rootRotate->addSon(m_translateEyeL);
+		m_scaleEye->addSon(m_eye);
 }
 
 void SceneGraph::Insecte::translateLocal(Math::Vector3f translation)
@@ -138,12 +127,12 @@ void SceneGraph::Insecte::setSpeed(float speed)
 	m_speed = speed;
 }
 
-void SceneGraph::Insecte::animateLocal(float dt)
+void SceneGraph::Insecte::animateLocal(double dt)
 {
 	this->animateWings(dt);
 }
 
-void SceneGraph::Insecte::animateWings(float dt)
+void SceneGraph::Insecte::animateWings(double dt)
 {
 	// Decide if wings go up or down
 	if (m_rotateWingL->getAngle() > m_maxAngleWing)
@@ -153,7 +142,7 @@ void SceneGraph::Insecte::animateWings(float dt)
 		m_upDownWing = true;
 
 	// Generate smooth rotation angle
-	double angle = 0;
+	float angle = 0;
 	if (m_rotateWingL->getAngle() > 0)
 		angle = m_speed*dt*(m_maxAngleWing + 0.3 - m_rotateWingL->getAngle());
 	else

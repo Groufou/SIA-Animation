@@ -11,6 +11,7 @@
 #include <SceneGraph/MeshVBO_v2.h>
 #include <GL/compatibility.h>
 #include <SceneGraph/Insecte.h>
+#include <Animation/HermiteSpline.h>
 
 namespace Application
 {
@@ -19,9 +20,11 @@ namespace Application
 	protected:
 		HelperGl::Camera m_camera ;
 
-		SceneGraph::Insecte *m_musquito;
+		SceneGraph::Insecte *m_musquito ;
 		
 		SceneGraph::Group m_root ;
+
+		HermiteSpline *trajectoire ;
 
 		virtual void handleKeys() 
 		{
@@ -59,9 +62,12 @@ namespace Application
 			HelperGl::LightServer::Light * light = HelperGl::LightServer::getSingleton()->createLight(lightPosition.popBack(), lightColor, lightColor, lightColor) ;
 			light->enable();
 
-			m_musquito = new SceneGraph::Insecte(1.0f);
+			m_camera.translateLocal(Math::makeVector(0.0, 0.0, 10.0));
+			m_musquito = new SceneGraph::Insecte(5.0f);
 
 			m_root.addSon(m_musquito);
+
+			trajectoire = new HermiteSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(3.0, 3.0, 3.0), Math::makeVector(0.0, 1.0, 0.0));
 		}
 
 		virtual void render(double dt)
@@ -70,6 +76,7 @@ namespace Application
 			GL::loadMatrix(m_camera.getInverseTransform()) ;
 
 			m_musquito->animateLocal(dt);
+			m_musquito->translateLocal(trajectoire->getPosition(dt));
 
 			m_root.draw() ;
 		}
