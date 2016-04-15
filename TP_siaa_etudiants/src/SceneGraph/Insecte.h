@@ -14,7 +14,7 @@ namespace SceneGraph
 {
 	class Insecte : public Group
 	{
-	private:
+	protected:
 		Translate *m_rootTranslate;
 		Rotate *m_rootRotate;
 
@@ -54,10 +54,10 @@ namespace SceneGraph
 		float getSpeed(void);
 		void setSpeed(float speed);
 
-		void animateLocal(float dt);
+		void animateLocal(double dt);
 
 	protected:
-		void animateWings(float dt);
+		void animateWings(double dt);
 	};
 }
 

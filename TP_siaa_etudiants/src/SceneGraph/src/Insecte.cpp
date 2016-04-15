@@ -8,7 +8,7 @@ SceneGraph::Insecte::Insecte(float speed) :
 	m_upDownWing(true)
 {
 	// Insecte Root
-	m_rootTranslate = new Translate(Math::makeVector(0.0f, 0.0f, -3.0f));
+	m_rootTranslate = new Translate(Math::makeVector(0.0f, 0.0f, 0.0f));
 	m_rootRotate = new Rotate(0.0f, Math::makeVector(0.0f, 0.0f, 0.0f));
 
 
@@ -81,29 +81,29 @@ void SceneGraph::Insecte::createSkeleton(void)
 {
 	// Insect Root
 	this->addSon(m_rootTranslate);
-	m_rootTranslate->addSon(m_rootRotate);
+		m_rootTranslate->addSon(m_rootRotate);
+			m_rootRotate->addSon(m_scaleBody);
+			m_rootRotate->addSon(m_translateAxeWingR);
+			m_rootRotate->addSon(m_translateAxeWingL);
+			m_rootRotate->addSon(m_translateEyeR);
+			m_rootRotate->addSon(m_translateEyeL);
 
 	// Insect Body
 	m_scaleBody->addSon(m_body);
-	m_rootRotate->addSon(m_scaleBody);
 
 	// Insect Wings
-	m_scaleWing->addSon(m_wing);
-	m_translateWingR->addSon(m_scaleWing);
-	m_translateWingL->addSon(m_scaleWing);
-	m_rotateWingR->addSon(m_translateWingR);
-	m_rotateWingL->addSon(m_translateWingL);
 	m_translateAxeWingR->addSon(m_rotateWingR);
 	m_translateAxeWingL->addSon(m_rotateWingL);
-	m_rootRotate->addSon(m_translateAxeWingR);
-	m_rootRotate->addSon(m_translateAxeWingL);
+		m_rotateWingR->addSon(m_translateWingR);
+		m_rotateWingL->addSon(m_translateWingL);
+			m_translateWingR->addSon(m_scaleWing);
+			m_translateWingL->addSon(m_scaleWing);
+				m_scaleWing->addSon(m_wing);
 
 	// Insect Eyes
-	m_scaleEye->addSon(m_eye);
 	m_translateEyeR->addSon(m_scaleEye);
 	m_translateEyeL->addSon(m_scaleEye);
-	m_rootRotate->addSon(m_translateEyeR);
-	m_rootRotate->addSon(m_translateEyeL);
+		m_scaleEye->addSon(m_eye);
 }
 
 void SceneGraph::Insecte::translateLocal(Math::Vector3f translation)
@@ -127,12 +127,12 @@ void SceneGraph::Insecte::setSpeed(float speed)
 	m_speed = speed;
 }
 
-void SceneGraph::Insecte::animateLocal(float dt)
+void SceneGraph::Insecte::animateLocal(double dt)
 {
 	this->animateWings(dt);
 }
 
-void SceneGraph::Insecte::animateWings(float dt)
+void SceneGraph::Insecte::animateWings(double dt)
 {
 	// Decide if wings go up or down
 	if (m_rotateWingL->getAngle() > m_maxAngleWing)
