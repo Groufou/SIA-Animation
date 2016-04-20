@@ -26,7 +26,8 @@ SceneGraph::Insecte::Insecte(double speed) :
 	//m_body2 = new MeshVBO_v2(m_bodyMesh);
 	
 	m_scaleBody = new Scale(Math::makeVector(1.0f, 0.3f, 0.3f));
-
+	//m_body3ds = new HelperGl::Loader3ds("../../INSECTE/Insecte.3DS","../../INSECTE/textures");
+	//m_bodyMesh = new MeshVBO_v2(m_body3ds->getMeshes()[0]);
 
 	// Insect Wings
 	HelperGl::Material matWing;
@@ -72,6 +73,8 @@ SceneGraph::Insecte::~Insecte(void)
 	delete m_body3ds;
 	delete m_bodyMesh;
 	delete m_scaleBody;
+	delete m_body3ds;
+	delete m_bodyMesh;
 
 	delete m_wing;
 	delete m_scaleWing;
@@ -101,7 +104,7 @@ void SceneGraph::Insecte::createSkeleton(void)
 
 	// Insect Body
 	m_scaleBody->addSon(m_body);
-
+	//m_scaleBody->addSon(m_bodyMesh);
 	// Insect Wings
 	m_translateAxeWingR->addSon(m_rotateWingR);
 	m_translateAxeWingL->addSon(m_rotateWingL);
