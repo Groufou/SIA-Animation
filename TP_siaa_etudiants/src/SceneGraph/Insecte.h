@@ -23,7 +23,8 @@ namespace SceneGraph
 
 		Sphere *m_body;
 		HelperGl::Loader3ds *m_body3ds;
-		MeshVBO_v2 *m_bodyMesh;
+		HelperGl::Mesh *m_bodyMesh;
+		MeshVBO_v2 *m_body2;
 		Scale *m_scaleBody;
 
 		Sphere *m_wing;
@@ -40,24 +41,24 @@ namespace SceneGraph
 		Translate *m_translateEyeR;
 		Translate *m_translateEyeL;
 
-		float m_speed;
+		double m_speed;
 
 		bool m_upDownWing;
-		float m_maxAngleWing;
-		float m_minAngleWing;
+		double m_maxAngleWing;
+		double m_minAngleWing;
 
 	public:
-		Insecte(float speed = 1.0f);
+		Insecte(double speed = 1.0f);
 		~Insecte(void);
 
 		void createSkeleton(void);
 
 		void translateLocal(Math::Vector3f translation);
 
-		void rotateLocal(float angle, Math::Vector3f axis);
+		void rotateLocal(double angle, Math::Vector3f axis);
 
-		float getSpeed(void);
-		void setSpeed(float speed);
+		double getSpeed(void);
+		void setSpeed(double speed);
 
 		void animateLocal(double dt);
 

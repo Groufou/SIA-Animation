@@ -24,7 +24,7 @@ namespace Application
 		
 		SceneGraph::Group m_root ;
 
-		HermiteSpline *trajectoire ;
+		HermiteSpline *m_target ;
 
 		virtual void handleKeys() 
 		{
@@ -63,11 +63,11 @@ namespace Application
 			light->enable();
 
 			m_camera.translateLocal(Math::makeVector(0.0, 0.0, 10.0));
-			m_musquito = new SceneGraph::Insecte(5.0f);
+			m_musquito = new SceneGraph::Insecte(10.0f);
 
 			m_root.addSon(m_musquito);
 
-			trajectoire = new HermiteSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(3.0, 3.0, 3.0), Math::makeVector(0.0, 1.0, 0.0));
+			m_target = new HermiteSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(3.0, 3.0, 3.0), Math::makeVector(0.0, 1.0, 0.0));
 		}
 
 		virtual void render(double dt)
@@ -76,7 +76,8 @@ namespace Application
 			GL::loadMatrix(m_camera.getInverseTransform()) ;
 
 			m_musquito->animateLocal(dt);
-			m_musquito->translateLocal(trajectoire->getPosition(dt));
+			m_musquito->translateLocal(m_target->getPosition(dt));
+			m_musquito->rotateLocal(m_target->getSpeed()*Math::makeVector(0.0f,1.0f,1.0f), Math::makeVector(0.0f,1.0f,1.0f));
 
 			m_root.draw() ;
 		}

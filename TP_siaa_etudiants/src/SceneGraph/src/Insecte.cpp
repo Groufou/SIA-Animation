@@ -1,7 +1,7 @@
 #include "..\Insecte.h"
 
 
-SceneGraph::Insecte::Insecte(float speed) :
+SceneGraph::Insecte::Insecte(double speed) :
 	m_speed(speed),
 	m_maxAngleWing(1.0f),
 	m_minAngleWing(-1.0f),
@@ -17,6 +17,14 @@ SceneGraph::Insecte::Insecte(float speed) :
 	matBody.setDiffuse(HelperGl::Color(0.0, 0.6, 0.4));
 	
 	m_body = new Sphere(matBody);
+	
+	//m_body3ds = new HelperGl::Loader3ds("C:/Users/Grouf/Documents/Visual Studio 2015/Projects/SIA-Animation/TP_siaa_etudiants/data/Helmet/helmet.3DS", "C:/Users/Grouf/Documents/Visual Studio 2015/Projects/SIA-Animation/TP_siaa_etudiants/data/Helmet/");
+	//m_bodyMesh = new HelperGl::Mesh(*m_body3ds->getMeshes()[0]);
+	//m_bodyMesh->computeFacesNormals();
+	//m_bodyMesh->computeVertexNormal();
+
+	//m_body2 = new MeshVBO_v2(m_bodyMesh);
+	
 	m_scaleBody = new Scale(Math::makeVector(1.0f, 0.3f, 0.3f));
 
 
@@ -60,6 +68,9 @@ SceneGraph::Insecte::Insecte(float speed) :
 SceneGraph::Insecte::~Insecte(void)
 {
 	delete m_body;
+	delete m_body2;
+	delete m_body3ds;
+	delete m_bodyMesh;
 	delete m_scaleBody;
 
 	delete m_wing;
@@ -108,21 +119,21 @@ void SceneGraph::Insecte::createSkeleton(void)
 
 void SceneGraph::Insecte::translateLocal(Math::Vector3f translation)
 {
-	m_rootTranslate->setTranslation(m_rootTranslate->getTranslation() + translation);
+	m_rootTranslate->setTranslation(translation);
 }
 
-void SceneGraph::Insecte::rotateLocal(float angle, Math::Vector3f axis)
+void SceneGraph::Insecte::rotateLocal(double angle, Math::Vector3f axis)
 {
 	m_rootRotate->setAxis(axis);
-	m_rootRotate->setAngle(m_rootRotate->getAngle() + angle);
+	m_rootRotate->setAngle(angle);
 }
 
-float SceneGraph::Insecte::getSpeed(void)
+double SceneGraph::Insecte::getSpeed(void)
 {
 	return m_speed;
 }
 
-void SceneGraph::Insecte::setSpeed(float speed)
+void SceneGraph::Insecte::setSpeed(double speed)
 {
 	m_speed = speed;
 }
