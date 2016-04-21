@@ -8,19 +8,22 @@
 class HermiteSpline
 {
 protected:
-	Math::Matrix4x4<float> hermite;
-	Math::Vector<Math::Vector3f , 4> spline;
-	Math::Interpolation interpolator;
+	Math::Matrix4x4<float> m_hermite;
+	Math::Vector<Math::Vector3f , 4> m_spline;
+	Math::Interpolation m_interpolator;
 
-	double u;
+	double m_u;
 
 public:
 	HermiteSpline(Math::Vector3f P0, Math::Vector3f P1, Math::Vector3f D0, Math::Vector3f D1);
+	HermiteSpline();
 	~HermiteSpline();
 
 	Math::Vector3f getPosition(double dt);
 	
 	Math::Vector3f getSpeed();
+
+	Math::Vector<Math::Vector3f, 4> getSpline();
 
 private:
 	void completeHermite(void);

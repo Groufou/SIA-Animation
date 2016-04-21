@@ -105,6 +105,7 @@ void SceneGraph::Insecte::createSkeleton(void)
 	// Insect Body
 	m_scaleBody->addSon(m_body);
 	//m_scaleBody->addSon(m_bodyMesh);
+
 	// Insect Wings
 	m_translateAxeWingR->addSon(m_rotateWingR);
 	m_translateAxeWingL->addSon(m_rotateWingL);

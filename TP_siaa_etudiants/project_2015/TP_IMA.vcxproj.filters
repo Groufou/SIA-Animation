@@ -111,6 +111,9 @@
     <ClCompile Include="..\src\Animation\src\HermiteSpline.cpp">
       <Filter>src\Animation\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Animation\src\Target.cpp">
+      <Filter>src\Animation\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Math\Vector.h">
@@ -282,6 +285,9 @@
       <Filter>src\SceneGraph</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Animation\HermiteSpline.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Animation\Target.h">
       <Filter>src\Animation</Filter>
     </ClInclude>
   </ItemGroup>

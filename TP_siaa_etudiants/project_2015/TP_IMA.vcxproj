@@ -109,6 +109,7 @@ copy "$(ProjectDir)\..\..\dependencies_ima\lib2015\$(Configuration)\*.dll" "$(Ou
     <ClCompile Include="..\src\Animation\src\HermiteSpline.cpp" />
     <ClCompile Include="..\src\Animation\src\KinematicChain.cpp" />
     <ClCompile Include="..\src\Animation\src\SpringMassSystem.cpp" />
+    <ClCompile Include="..\src\Animation\src\Target.cpp" />
     <ClCompile Include="..\src\Application\src\ApplicationSelection.cpp" />
     <ClCompile Include="..\src\Application\src\Base.cpp" />
     <ClCompile Include="..\src\Application\src\Menu.cpp" />
@@ -135,6 +136,7 @@ copy "$(ProjectDir)\..\..\dependencies_ima\lib2015\$(Configuration)\*.dll" "$(Ou
     <ClInclude Include="..\src\Animation\Particle.h" />
     <ClInclude Include="..\src\Animation\ParticleSystem.h" />
     <ClInclude Include="..\src\Animation\SpringMassSystem.h" />
+    <ClInclude Include="..\src\Animation\Target.h" />
     <ClInclude Include="..\src\Application\ApplicationSelection.h" />
     <ClInclude Include="..\src\Application\Base.h" />
     <ClInclude Include="..\src\Application\BaseWithKeyboard.h" />
