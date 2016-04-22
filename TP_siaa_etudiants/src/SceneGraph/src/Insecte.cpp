@@ -128,8 +128,8 @@ void SceneGraph::Insecte::translateLocal(Math::Vector3f translation)
 
 void SceneGraph::Insecte::rotateLocal(double angle, Math::Vector3f axis)
 {
-	m_rootRotate->setAxis(axis);
 	m_rootRotate->setAngle(angle);
+	m_rootRotate->setAxis(axis);
 }
 
 double SceneGraph::Insecte::getSpeed(void)

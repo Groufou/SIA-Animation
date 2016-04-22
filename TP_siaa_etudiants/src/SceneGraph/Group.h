@@ -74,7 +74,7 @@ namespace SceneGraph
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		virtual void draw()
 		{
-			::std::for_each(m_sons.begin(), m_sons.end(), [](NodeInterface * node) { node->draw() ; }) ;
+			::std::for_each(m_sons.begin(), m_sons.end(), [](NodeInterface * node) {node->draw() ; }) ;
 		}
 	};
 }

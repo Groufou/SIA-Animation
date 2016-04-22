@@ -15,11 +15,14 @@ Target::~Target()
 
 void Target::addSpline(Math::Vector3f position, Math::Vector3f tangent)
 {
-	Math::Vector3f initialPosition = (*m_hermites)[m_nbSpline-1].getSpline()[1];
-	Math::Vector3f revertTangent = (*m_hermites)[m_nbSpline-1].getSpline()[3];
+	if (m_nbSpline < m_hermites->size())
+	{
+		Math::Vector3f initialPosition = (*m_hermites)[m_nbSpline - 1].getSpline()[1];
+		Math::Vector3f revertTangent = (*m_hermites)[m_nbSpline - 1].getSpline()[3];
 
-	(*m_hermites)[m_nbSpline] = HermiteSpline(initialPosition, revertTangent, position, tangent);
-	m_nbSpline++;
+		(*m_hermites)[m_nbSpline] = HermiteSpline(initialPosition, revertTangent, position, tangent);
+		m_nbSpline++;
+	}
 }
 
 void Target::removeSpline(int indice)

@@ -68,11 +68,9 @@ namespace Application
 
 			m_root.addSon(m_musquito);
 
-			HermiteSpline firstSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(3.0, 3.0, 3.0), Math::makeVector(0.0, 1.0, 0.0));
-
-			m_target = new Target(firstSpline, 3);
-			m_target->addSpline(Math::makeVector(0.0, -2.0, -5.0), Math::makeVector(1.0, 0.0, 0.0));
-			m_target->addSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(-1.0, 0.0, 0.0));
+			m_target = new Target(HermiteSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, 1.0), Math::makeVector(3.0, 3.0, 3.0), Math::makeVector(-1.0, 0.0, 0.0)), 3);
+			m_target->addSpline(Math::makeVector(0.0, -2.0, -5.0), Math::makeVector(1.0, 0.0, 1.0));
+			m_target->addSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, -1.0));
 		}
 
 		virtual void render(double dt)
@@ -82,7 +80,8 @@ namespace Application
 
 			m_musquito->animateLocal(dt);
 			m_musquito->translateLocal(m_target->getPosition(dt));
-			m_musquito->rotateLocal(m_target->getSpeed()*Math::makeVector(0.0f,0.0f,1.0f), Math::makeVector(1.0f,0.0f,1.0f));
+			
+			m_musquito->rotateLocal(m_target->getSpeed()*Math::makeVector(1.0, 0.0, 0.0), Math::makeVector(0.0, 1.0, 1.0));
 
 			m_root.draw() ;
 		}

@@ -35,7 +35,7 @@ Math::Vector3f HermiteSpline::getPosition(double dt)
 
 Math::Vector3f HermiteSpline::getSpeed()
 {
-	float h = 0.0001;
+	float h = 0.000001;
 	
 	return (computePosition(m_u + h) - computePosition(m_u)) / h;
 }

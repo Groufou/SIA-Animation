@@ -144,6 +144,7 @@ copy "$(ProjectDir)\..\..\dependencies_ima\lib2015\$(Configuration)\*.dll" "$(Ou
     <ClInclude Include="..\src\Application\Menu.h" />
     <ClInclude Include="..\src\Application\TP1.h" />
     <ClInclude Include="..\src\Application\TP1_siaa.h" />
+    <ClInclude Include="..\src\Application\TP2_siaa.h" />
     <ClInclude Include="..\src\Config.h" />
     <ClInclude Include="..\src\GL\compatibility.h" />
     <ClInclude Include="..\src\HelperGl\Buffer.h" />
