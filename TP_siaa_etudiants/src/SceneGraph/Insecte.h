@@ -18,28 +18,26 @@ namespace SceneGraph
 	class Insecte : public Group
 	{
 	protected:
-		Translate *m_rootTranslate;
-		Rotate *m_rootRotate;
+		Translate m_rootTranslate;
+		Rotate m_rootRotateY;
+		Rotate m_rootRotateZ;
 
 		Sphere *m_body;
-		HelperGl::Loader3ds *m_body3ds;
-		HelperGl::Mesh *m_bodyMesh;
-		MeshVBO_v2 *m_body2;
-		Scale *m_scaleBody;
+		Scale m_scaleBody;
 
 		Sphere *m_wing;
-		Scale *m_scaleWing;
-		Translate *m_translateAxeWingR;
-		Translate *m_translateAxeWingL;
-		Rotate *m_rotateWingR;
-		Rotate *m_rotateWingL;
-		Translate *m_translateWingR;
-		Translate *m_translateWingL;
+		Scale m_scaleWing;
+		Translate m_translateAxeWingR;
+		Translate m_translateAxeWingL;
+		Rotate m_rotateWingR;
+		Rotate m_rotateWingL;
+		Translate m_translateWingR;
+		Translate m_translateWingL;
 
 		Sphere *m_eye;
-		Scale *m_scaleEye;
-		Translate *m_translateEyeR;
-		Translate *m_translateEyeL;
+		Scale m_scaleEye;
+		Translate m_translateEyeR;
+		Translate m_translateEyeL;
 
 		double m_speed;
 
@@ -51,11 +49,10 @@ namespace SceneGraph
 		Insecte(double speed = 1.0f);
 		~Insecte(void);
 
-		void createSkeleton(void);
-
 		void translateLocal(Math::Vector3f translation);
 
-		void rotateLocal(double angle, Math::Vector3f axis);
+		void rotateLocalY(double angle);
+		void rotateLocalZ(double angle);
 
 		double getSpeed(void);
 		void setSpeed(double speed);
@@ -64,6 +61,8 @@ namespace SceneGraph
 
 	protected:
 		void animateWings(double dt);
+
+		void createSkeleton(void);
 	};
 }
 

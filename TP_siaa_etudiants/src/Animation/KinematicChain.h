@@ -1,4 +1,4 @@
-#ifndef _Animation_Kinematics_H
+ï»¿#ifndef _Animation_Kinematics_H
 #define _Animation_Kinematics_H
 
 #include <Math/Matrix4x4f.h>
@@ -16,31 +16,31 @@ namespace Animation
 	///
 	/// \brief	An articulated chain.
 	///
-	/// \author	F. Lamarche, Université de Rennes 1
+	/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 	/// \date	11/02/2016
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	class KinematicChain
 	{
 	public:
 		// Forward declarations of some classes
-		class Node ;
-		class StaticNode ;
-		class DynamicNode ;
+		class Node;
+		class StaticNode;
+		class DynamicNode;
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// \class	DegreeOfFreedom
 		///
 		/// \brief	Manipulation of a degree of freedom. This class is compatible with a float value 
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	12/02/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		class DegreeOfFreedom
 		{
 		protected:
-			const Math::Interval<float> * m_constraint ;
-			float * m_value ;
-			DynamicNode * m_node ;
+			const Math::Interval<float> * m_constraint;
+			float * m_value;
+			DynamicNode * m_node;
 
 		public:
 
@@ -50,7 +50,7 @@ namespace Animation
 			///
 			/// \brief	Constructor.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			///
 			/// \param node 		The node providing this degree of freedom.
@@ -60,7 +60,7 @@ namespace Animation
 			DegreeOfFreedom(DynamicNode * node, const Math::Interval<float> * constraint, float* value)
 				: m_constraint(constraint), m_value(value), m_node(node)
 			{
-				assert(value!=NULL) ;
+				assert(value != NULL);
 			}
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,12 +68,12 @@ namespace Animation
 			///
 			/// \brief	float casting operator.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			operator float() const
 			{
-				return *m_value ;
+				return *m_value;
 			}
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,14 +81,14 @@ namespace Animation
 			///
 			/// \brief	Gets the constraint.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			///
 			/// \return	.
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			const Math::Interval<float> & constraint() const
 			{
-				return *m_constraint ;
+				return *m_constraint;
 			}
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,14 +96,14 @@ namespace Animation
 			///
 			/// \brief	Gets the node associated with the DOF.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	17/02/2016
 			///
 			/// \return	null if it fails, else.
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			DynamicNode * node() const
 			{
-				return m_node ;
+				return m_node;
 			}
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,7 +112,7 @@ namespace Animation
 			/// \brief	Assignment operator. This operator ensures the constraints i.e. if the value is outside
 			/// 		the authorized interval, it is rounded to the nearest valid value.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			///
 			/// \param	value	The value.
@@ -121,9 +121,9 @@ namespace Animation
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			DegreeOfFreedom & operator = (float value)
 			{
-				(*m_value) = value ;
-				m_node->update() ;
-				return *this ;
+				(*m_value) = value;
+				m_node->update();
+				return *this;
 			}
 		};
 
@@ -132,40 +132,40 @@ namespace Animation
 		///
 		/// \brief	Super class of Nodes.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		class Node
 		{
 		private:
 			Node(const Node &) {}
-			Node & operator=(const Node &) { return *this ; }
+			Node & operator=(const Node &) { return *this; }
 
 		protected:
 			/// \brief	The father node.
-			Node * m_father ;
+			Node * m_father;
 			/// \brief	The sons nodes.
-			::std::vector<Node*> m_sons ;
+			::std::vector<Node*> m_sons;
 			/// \brief	The degrees of freedom.
-			::std::vector<DegreeOfFreedom> m_degreesOfFreedom ;
+			::std::vector<DegreeOfFreedom> m_degreesOfFreedom;
 			/// \brief	The transformation associated with this node.
-			Math::Matrix4x4f m_transformation ;
+			Math::Matrix4x4f m_transformation;
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			/// \fn	void Node::addSon(Node * son)
 			///
 			/// \brief	Adds a son node.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			///
 			/// \param son	The new son node.
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			void addSon(Node * son)
 			{
-				assert(son!=NULL) ;
-				assert(son->m_father==this) ;
-				m_sons.push_back(son) ;
+				assert(son != NULL);
+				assert(son->m_father == this);
+				m_sons.push_back(son);
 			}
 
 		public:
@@ -175,7 +175,7 @@ namespace Animation
 			///
 			/// \brief	Constructor.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			///
 			/// \param	father	(optional) [in,out] If non-null, the father node.
@@ -184,9 +184,9 @@ namespace Animation
 			Node(Node * father = NULL, const Math::Matrix4x4f & matrix = Math::Matrix4x4f::getIdentity())
 				: m_father(father), m_transformation(matrix)
 			{
-				if(m_father!=NULL)
+				if (m_father != NULL)
 				{
-					m_father->addSon(this) ;
+					m_father->addSon(this);
 				}
 			}
 
@@ -195,14 +195,14 @@ namespace Animation
 			///
 			/// \brief	Gets the local transformation.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			///
 			/// \return	The local transformation.
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			const Math::Matrix4x4f & getLocalTransformation() const
 			{
-				return m_transformation ;
+				return m_transformation;
 			}
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -210,21 +210,21 @@ namespace Animation
 			///
 			/// \brief	Gets the global transformation leading from the root to this node.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			///
 			/// \return	The global transformation.
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			Math::Matrix4x4f getGlobalTransformation() const
 			{
-				Math::Matrix4x4f result = m_transformation ;
-				Node * father = m_father ;
-				while(father!=NULL)
+				Math::Matrix4x4f result = m_transformation;
+				Node * father = m_father;
+				while (father != NULL)
 				{
-					result = father->m_transformation * result ;
-					father = father->m_father ;
+					result = father->m_transformation * result;
+					father = father->m_father;
 				}
-				return result ;
+				return result;
 			}
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -232,14 +232,14 @@ namespace Animation
 			///
 			/// \brief	Gets the degrees of freedom of this node.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			///
 			/// \return	The degree of freedom.
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			const ::std::vector<DegreeOfFreedom> & getDOF() const
 			{
-				return m_degreesOfFreedom ;
+				return m_degreesOfFreedom;
 			}
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -247,14 +247,14 @@ namespace Animation
 			///
 			/// \brief	Gets the sons.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			///
 			/// \return	The sons.
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			const ::std::vector<Node*> & getSons() const
 			{
-				return m_sons ;
+				return m_sons;
 			}
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -262,18 +262,18 @@ namespace Animation
 			///
 			/// \brief	Collects the degrees of freedom from this node to the root.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			///
 			/// \param [in,out]	collected	The collected degrees of freedom.
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			void collectDegreesOfFreedom(::std::vector<DegreeOfFreedom> & collected) const
 			{
-				if(m_father!=NULL)
+				if (m_father != NULL)
 				{
-					m_father->collectDegreesOfFreedom(collected) ;
+					m_father->collectDegreesOfFreedom(collected);
 				}
-				::std::copy(m_degreesOfFreedom.begin(), m_degreesOfFreedom.end(), ::std::back_inserter(collected)) ;
+				::std::copy(m_degreesOfFreedom.begin(), m_degreesOfFreedom.end(), ::std::back_inserter(collected));
 			}
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -282,7 +282,7 @@ namespace Animation
 			/// \brief	Updates the current transformation. You should not call this function, update is 
 			/// 		automatically triggered when a degree of freedom is modified.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	12/02/2016
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 			virtual void update()
@@ -297,7 +297,7 @@ namespace Animation
 		///
 		/// \brief	Super class of static nodes.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		class StaticNode : public Node
@@ -309,7 +309,7 @@ namespace Animation
 			///
 			/// \brief	Constructor.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	02/03/2016
 			///
 			/// \param	father	(optional) [in,out] If non-null, the father node.
@@ -325,7 +325,7 @@ namespace Animation
 		///
 		/// \brief	Super class of dynamic nodes.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		class DynamicNode : public Node
@@ -337,7 +337,7 @@ namespace Animation
 			///
 			/// \brief	Constructor.
 			///
-			/// \author	F. Lamarche, Université de Rennes 1
+			/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 			/// \date	02/03/2016
 			///
 			/// \param	father	(optional) [in,out] If non-null, the father node.
@@ -351,14 +351,14 @@ namespace Animation
 	private:
 		// We forbid the copy constructor and the affectation operator
 		KinematicChain(KinematicChain const &) {}
-		KinematicChain & operator=(const KinematicChain &) { return *this ; }
+		KinematicChain & operator=(const KinematicChain &) { return *this; }
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// \class	StaticTranslation
 		///
 		/// \brief	Static translation.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		class StaticTranslation : public StaticNode
@@ -374,7 +374,7 @@ namespace Animation
 		///
 		/// \brief	Static euler rotation.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		class StaticEulerRotation : public StaticNode
@@ -390,7 +390,7 @@ namespace Animation
 		///
 		/// \brief	Static scale factor.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		class StaticScale : public StaticNode
@@ -406,34 +406,34 @@ namespace Animation
 		///
 		/// \brief	A dynamic Euler rotation. DOFs are the X,Y,Z angles.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		class EulerRotation : public DynamicNode
 		{
 		protected:
-			Math::Interval<float> m_ctrX, m_ctrY, m_ctrZ ;
-			float m_angleX, m_angleY, m_angleZ ;
+			Math::Interval<float> m_ctrX, m_ctrY, m_ctrZ;
+			float m_angleX, m_angleY, m_angleZ;
 
 		public:
 			EulerRotation(Node * father, const Math::Interval<float> & ctrX, float angleX, const Math::Interval<float> & ctrY, float angleY, const Math::Interval<float> & ctrZ, float angleZ)
 				: DynamicNode(father), m_ctrX(ctrX), m_ctrY(ctrY), m_ctrZ(ctrZ), m_angleX(angleX), m_angleY(angleY), m_angleZ(angleZ)
 			{
-				assert(m_ctrX.contains(m_angleX)) ;
-				assert(m_ctrY.contains(m_angleY)) ;
-				assert(m_ctrZ.contains(m_angleZ)) ;
-				update() ;
-				m_degreesOfFreedom.push_back(DegreeOfFreedom(this, &m_ctrX, &m_angleX)) ;
-				m_degreesOfFreedom.push_back(DegreeOfFreedom(this, &m_ctrY, &m_angleY)) ;
-				m_degreesOfFreedom.push_back(DegreeOfFreedom(this, &m_ctrZ, &m_angleZ)) ;
+				assert(m_ctrX.contains(m_angleX));
+				assert(m_ctrY.contains(m_angleY));
+				assert(m_ctrZ.contains(m_angleZ));
+				update();
+				m_degreesOfFreedom.push_back(DegreeOfFreedom(this, &m_ctrX, &m_angleX));
+				m_degreesOfFreedom.push_back(DegreeOfFreedom(this, &m_ctrY, &m_angleY));
+				m_degreesOfFreedom.push_back(DegreeOfFreedom(this, &m_ctrZ, &m_angleZ));
 			}
 
 			virtual void update()
 			{
-				m_angleX = m_ctrX.clamp(m_angleX) ;
-				m_angleY = m_ctrY.clamp(m_angleY) ;
-				m_angleZ = m_ctrZ.clamp(m_angleZ) ;
-				m_transformation = Math::Matrix4x4f::getRotationX(m_angleX)*Math::Matrix4x4f::getRotationY(m_angleY)*Math::Matrix4x4f::getRotationZ(m_angleZ) ;
+				m_angleX = m_ctrX.clamp(m_angleX);
+				m_angleY = m_ctrY.clamp(m_angleY);
+				m_angleZ = m_ctrZ.clamp(m_angleZ);
+				m_transformation = Math::Matrix4x4f::getRotationX(m_angleX)*Math::Matrix4x4f::getRotationY(m_angleY)*Math::Matrix4x4f::getRotationZ(m_angleZ);
 			}
 		};
 
@@ -442,29 +442,29 @@ namespace Animation
 		///
 		/// \brief	Axis angle rotation with 1 degree of freedom : the rotation angle
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	02/03/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		class Rotation : public DynamicNode
 		{
 		protected:
-			Math::Vector3f m_axis ;
-			Math::Interval<float> m_ctrAngle ;
-			float m_angle ;
+			Math::Vector3f m_axis;
+			Math::Interval<float> m_ctrAngle;
+			float m_angle;
 
 		public:
 			Rotation(Node * father, Math::Vector3f const & axis, const Math::Interval<float> & ctrAngle, float angle)
-				: DynamicNode(father), m_axis(axis), m_angle(angle)
+				: DynamicNode(father), m_axis(axis), m_ctrAngle(ctrAngle), m_angle(angle)
 			{
-				assert(m_ctrAngle.contains(m_angle)) ;
-				update() ;
-				m_degreesOfFreedom.push_back(DegreeOfFreedom(this, &m_ctrAngle, &m_angle)) ;
+				assert(m_ctrAngle.contains(m_angle));
+				update();
+				m_degreesOfFreedom.push_back(DegreeOfFreedom(this, &m_ctrAngle, &m_angle));
 			}
 
 			virtual void update()
 			{
-				m_angle = m_ctrAngle.clamp(m_angle) ;
-				m_transformation = Math::Matrix4x4f::getRotation(m_axis, m_angle) ;
+				m_angle = m_ctrAngle.clamp(m_angle);
+				m_transformation = Math::Matrix4x4f::getRotation(m_axis, m_angle);
 			}
 		};
 
@@ -473,49 +473,49 @@ namespace Animation
 		///
 		/// \brief	A dynamic translation. The DOF is the norm of the translation vector.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		class Translation : public DynamicNode
 		{
 		protected:
-			Math::Interval<float> m_ctrNorm ;
-			float m_norm ;
-			Math::Vector3f m_normalizedVector ;
+			Math::Interval<float> m_ctrNorm;
+			float m_norm;
+			Math::Vector3f m_normalizedVector;
 
 		public:
 			Translation(Node * father, Math::Interval<float> const & ctrNorm, Math::Vector3f const & translation)
 				: DynamicNode(father), m_ctrNorm(ctrNorm), m_norm(translation.norm()), m_normalizedVector(translation.normalized())
 			{
-				assert(m_ctrNorm.contains(m_norm)) ;
-				update() ;
-				m_degreesOfFreedom.push_back(DegreeOfFreedom(this, &m_ctrNorm, &m_norm)) ;
+				assert(m_ctrNorm.contains(m_norm));
+				update();
+				m_degreesOfFreedom.push_back(DegreeOfFreedom(this, &m_ctrNorm, &m_norm));
 			}
 
 			virtual void update()
 			{
-				m_norm = m_ctrNorm.clamp(m_norm) ;
-				m_transformation = Math::Matrix4x4f::getTranslation(m_normalizedVector*m_norm) ;
+				m_norm = m_ctrNorm.clamp(m_norm);
+				m_transformation = Math::Matrix4x4f::getTranslation(m_normalizedVector*m_norm);
 			}
 		};
 
 	protected:
 		/// The root of the chain
-		Node m_root ;
+		Node m_root;
 
 	private:
 		void destroySons(Node * node)
 		{
-			for(auto it = node->getSons().begin(), end = node->getSons().end() ; it!=end ; ++it)
+			for (auto it = node->getSons().begin(), end = node->getSons().end(); it != end; ++it)
 			{
-				destroySons(*it) ;
-				delete *it ;
+				destroySons(*it);
+				delete *it;
 			}
 		}
 
 		void destroy()
 		{
-			destroySons(&m_root) ;
+			destroySons(&m_root);
 		}
 
 	public:
@@ -525,7 +525,7 @@ namespace Animation
 		///
 		/// \brief	Default constructor.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		KinematicChain()
@@ -536,14 +536,14 @@ namespace Animation
 		///
 		/// \brief	Gets the root node.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		///
 		/// \return	null if it fails, else the root.
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		Node * getRoot()
 		{
-			return &m_root ;
+			return &m_root;
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -553,7 +553,7 @@ namespace Animation
 		/// \brief	Adds a dynamic translation in the hierarchy. In this translation, only the norm of the vector
 		/// 		is a DOF.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		///
 		/// \param [in,out]	father	The father node (must not be null).
@@ -564,9 +564,9 @@ namespace Animation
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		DynamicNode * addDynamicTranslation(Node * father, Math::Interval<float> const & normConstraint, Math::Vector3f const & translation)
 		{
-			assert(father!=NULL) ;
-			DynamicNode * result = new Translation(father, normConstraint, translation) ;
-			return result ;
+			assert(father != NULL);
+			DynamicNode * result = new Translation(father, normConstraint, translation);
+			return result;
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -576,7 +576,7 @@ namespace Animation
 		///
 		/// \brief	Adds a dynamic euler rotation. DOFs are the X, Y and Z angles.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		///
 		/// \param [in,out]	father	The father node (must not be null).
@@ -591,9 +591,9 @@ namespace Animation
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		DynamicNode * addDynamicEulerRotation(Node * father, const Math::Interval<float> & ctrX, float angleX, const Math::Interval<float> & ctrY, float angleY, const Math::Interval<float> & ctrZ, float angleZ)
 		{
-			assert(father!=NULL) ;
-			DynamicNode * result = new EulerRotation(father, ctrX, angleX, ctrY, angleY, ctrZ, angleZ) ;
-			return result ;
+			assert(father != NULL);
+			DynamicNode * result = new EulerRotation(father, ctrX, angleX, ctrY, angleY, ctrZ, angleZ);
+			return result;
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -602,7 +602,7 @@ namespace Animation
 		///
 		/// \brief	Adds a dynamic rotation.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	02/03/2016
 		///
 		/// \param [in,out]	father	The father node, must not be null.
@@ -614,9 +614,9 @@ namespace Animation
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		DynamicNode * addDynamicRotation(Node * father, Math::Vector3f const & axis, const Math::Interval<float> & ctrAngle, float angle)
 		{
-			assert(father!=NULL) ;
-			DynamicNode * result = new Rotation(father, axis, ctrAngle, angle) ;
-			return result ;
+			assert(father != NULL);
+			DynamicNode * result = new Rotation(father, axis, ctrAngle, angle);
+			return result;
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -625,7 +625,7 @@ namespace Animation
 		///
 		/// \brief	Adds a static translation.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		///
 		/// \param  father	The father node.
@@ -635,9 +635,9 @@ namespace Animation
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		StaticNode * addStaticTranslation(Node * father, Math::Vector3f const & translation)
 		{
-			assert(father!=NULL) ;
-			StaticNode * result = new StaticTranslation(father, translation) ;
-			return result ;
+			assert(father != NULL);
+			StaticNode * result = new StaticTranslation(father, translation);
+			return result;
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -646,7 +646,7 @@ namespace Animation
 		///
 		/// \brief	Adds a static euler rotation.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		///
 		/// \param [in,out]	father	If non-null, the father.
@@ -658,9 +658,9 @@ namespace Animation
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		StaticNode * addStaticEulerRotation(Node * father, float angleX, float angleY, float angleZ)
 		{
-			assert(father!=NULL) ;
-			StaticNode * result = new StaticEulerRotation(father, angleX, angleY, angleZ) ; 
-			return result ;
+			assert(father != NULL);
+			StaticNode * result = new StaticEulerRotation(father, angleX, angleY, angleZ);
+			return result;
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -669,7 +669,7 @@ namespace Animation
 		///
 		/// \brief	Derivates the position of the extremity of the chain with offset offset.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	11/02/2016
 		///
 		/// \param extremity	The extremity.
@@ -681,16 +681,16 @@ namespace Animation
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		Math::Vector3f derivate(Node * extremity, const Math::Vector3f & offset, DegreeOfFreedom & dof, float epsilon) const
 		{
-			float referenceValue = dof ; 
-			float realEpsilon = 0.0f ;
-			dof = referenceValue+epsilon ;
-			realEpsilon += dof-referenceValue ;
-			Math::Vector3f transformPlus = extremity->getGlobalTransformation()*offset ;
-			dof = referenceValue-epsilon ;
-			realEpsilon += referenceValue-dof ;
-			Math::Vector3f transformMinus = extremity->getGlobalTransformation()*offset ;
-			dof = referenceValue ;
-			return (transformPlus-transformMinus)/(realEpsilon) ;
+			float referenceValue = dof;
+			float realEpsilon = 0.0f;
+			dof = referenceValue + epsilon;
+			realEpsilon += dof - referenceValue;
+			Math::Vector3f transformPlus = extremity->getGlobalTransformation()*offset;
+			dof = referenceValue - epsilon;
+			realEpsilon += referenceValue - dof;
+			Math::Vector3f transformMinus = extremity->getGlobalTransformation()*offset;
+			dof = referenceValue;
+			return (transformPlus - transformMinus) / (realEpsilon);
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -698,12 +698,12 @@ namespace Animation
 		///
 		/// \brief	Destructor.
 		///
-		/// \author	F. Lamarche, Université de Rennes 1
+		/// \author	F. Lamarche, Universitï¿½ de Rennes 1
 		/// \date	12/02/2016
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		~KinematicChain()
 		{
-			destroy() ;
+			destroy();
 		}
 	};
 

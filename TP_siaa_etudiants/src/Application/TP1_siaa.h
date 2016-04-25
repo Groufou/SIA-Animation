@@ -12,7 +12,8 @@
 #include <GL/compatibility.h>
 #include <SceneGraph/Insecte.h>
 #include <Animation/HermiteSpline.h>
-#include <Animation/Target.h>
+#include <Animation/HermiteTarget.h>
+#include <math.h>
 
 namespace Application
 {
@@ -25,7 +26,7 @@ namespace Application
 		
 		SceneGraph::Group m_root ;
 
-		Target *m_target ;
+		HermiteTarget *m_target ;
 
 		virtual void handleKeys() 
 		{
@@ -68,7 +69,7 @@ namespace Application
 
 			m_root.addSon(m_musquito);
 
-			m_target = new Target(HermiteSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, 1.0), Math::makeVector(3.0, 3.0, 3.0), Math::makeVector(-1.0, 0.0, 0.0)), 3);
+			m_target = new HermiteTarget(HermiteSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, 1.0), Math::makeVector(3.0, 3.0, 3.0), Math::makeVector(-1.0, 0.0, 0.0)), 3);
 			m_target->addSpline(Math::makeVector(0.0, -2.0, -5.0), Math::makeVector(1.0, 0.0, 1.0));
 			m_target->addSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, -1.0));
 		}
@@ -81,7 +82,11 @@ namespace Application
 			m_musquito->animateLocal(dt);
 			m_musquito->translateLocal(m_target->getPosition(dt));
 			
-			m_musquito->rotateLocal(m_target->getSpeed()*Math::makeVector(1.0, 0.0, 0.0), Math::makeVector(0.0, 1.0, 1.0));
+			double angleY = acos((m_target->getSpeed()*Math::makeVector(0.0, 1.0, 0.0)) / m_target->getSpeed().norm());
+			double angleZ = acos((m_target->getSpeed()*Math::makeVector(0.0, 0.0, 1.0)) / m_target->getSpeed().norm());
+
+			m_musquito->rotateLocalY(-angleY);
+			m_musquito->rotateLocalZ(angleZ);
 
 			m_root.draw() ;
 		}

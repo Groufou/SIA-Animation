@@ -111,7 +111,10 @@
     <ClCompile Include="..\src\Animation\src\HermiteSpline.cpp">
       <Filter>src\Animation\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Animation\src\Target.cpp">
+    <ClCompile Include="..\src\Animation\src\HermiteTarget.cpp">
+      <Filter>src\Animation\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Animation\src\CyclicCoordinateDescent.cpp">
       <Filter>src\Animation\src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -287,11 +290,14 @@
     <ClInclude Include="..\src\Animation\HermiteSpline.h">
       <Filter>src\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Animation\Target.h">
-      <Filter>src\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Application\TP2_siaa.h">
       <Filter>src\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Animation\HermiteTarget.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Animation\CyclicCoordinateDescent.h">
+      <Filter>src\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
