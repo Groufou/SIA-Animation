@@ -192,6 +192,7 @@ copy "$(ProjectDir)\..\..\dependencies_ima\lib2015\$(Configuration)\*.dll" "$(Ou
     <ClInclude Include="..\src\SceneGraph\Translate.h" />
     <ClInclude Include="..\src\System\Path.h" />
     <ClInclude Include="..\src\Utils\History.h" />
+    <ClInclude Include="TP3_siaa.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

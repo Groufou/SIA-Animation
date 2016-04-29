@@ -9,6 +9,8 @@
 #include <Animation/KinematicChain.h>
 #include <Animation/CyclicCoordinateDescent.h>
 #include <Math/Interval.h>
+#include <Animation/HermiteSpline.h>
+#include <Animation/HermiteTarget.h>
 
 #include <Application/BaseWithKeyboard.h>
 #include <Application/KeyboardStatus.h>
@@ -31,7 +33,7 @@ namespace Application
 		std::vector<std::pair<SceneGraph::Rotate*, Animation::KinematicChain::Node*> > m_mapDOF;
 
 		CyclicCoordinateDescent *m_ccd;
-
+		HermiteTarget *m_target;
 
 		virtual void handleKeys() 
 		{
@@ -57,19 +59,8 @@ namespace Application
 			
 			// Random Goal
 			if (m_keyboard.isPressed('n')) { 
-
 				Math::Vector3f position = Math::makeVector((float)(std::rand() % 20 - 10), (float)(std::rand() % 20 - 10), (float)(std::rand() % 20 - 10));
 				m_translateObjectif->setTranslation(position);
-
-				/*bool solved = false;
-				do {
-					Math::Vector3f position = Math::makeVector((float)(std::rand() % 20 - 10), (float)(std::rand() % 20 - 10), (float)(std::rand() % 20 - 10));
-					
-					solved = m_ccd->solve(position, 0.1);
-					if(solved)
-						m_translateObjectif->setTranslation(position);
-
-				} while (!solved);*/
 			}
 		}
 
@@ -138,19 +129,25 @@ namespace Application
 			HelperGl::LightServer::Light * light = HelperGl::LightServer::getSingleton()->createLight(lightPosition.popBack(), lightColor, lightColor, lightColor) ;
 			light->enable();
 
-			m_camera.translateLocal(Math::makeVector(0.0, 0.0, 10.0));
+			m_camera.translateLocal(Math::makeVector(0.0, 0.0, 20.0));
 
 			HelperGl::Material matObjectif;
 			matObjectif.setDiffuse(HelperGl::Color(1.0f, 0.0f, 0.0f));
 			m_sphereObjectif = new SceneGraph::Sphere(matObjectif, 0.2f);
 			
-			m_translateObjectif = new SceneGraph::Translate(Math::makeVector(-3.0f, 2.0f, 3.0f));
+			m_translateObjectif = new SceneGraph::Translate(Math::makeVector(7.0f, 3.0f, 0.0f));
 
 			m_root.addSon(m_translateObjectif);
 			m_translateObjectif->addSon(m_sphereObjectif);
 
-			Animation::KinematicChain::Node *extremity = polyArticulatedChain(&m_root, m_rootChain.getRoot(), 15);
-
+			Animation::KinematicChain::Node *extremity = polyArticulatedChain(&m_root, m_rootChain.getRoot(), 12);
+			Math::Vector3f extremePosition = Math::makeVector(extremity->getGlobalTransformation()(0, 3), extremity->getGlobalTransformation()(1, 3), extremity->getGlobalTransformation()(2, 3));
+			
+			m_target = new HermiteTarget(HermiteSpline(extremePosition, Math::makeVector(0.0f, 1.0f, 0.0f), Math::makeVector(0.0f, 10.0f, -3.0f), Math::makeVector(1.0f, 0.0f, 0.0f)));
+			m_target->addSpline(Math::makeVector(-10.0f, 0.0f, 0.0f), Math::makeVector(0.0f, 1.0f, 0.0f));
+			m_target->addSpline(Math::makeVector(0.0f, -10.0f, 3.0f), Math::makeVector(-1.0f, 0.0f, 0.0f));
+			m_target->addSpline(extremePosition, Math::makeVector(0.0f, -1.0f, 0.0f));
+			
 			m_ccd = new CyclicCoordinateDescent(&m_rootChain, extremity);
 		}
 
@@ -161,7 +158,8 @@ namespace Application
 			
 			m_root.draw() ;
 
-			m_ccd->convergeToward(m_translateObjectif->getTranslation(), 0.001);
+			m_ccd->solve(m_target->getPosition(0.0015), 0.0005f);
+			// m_ccd->convergeToward(m_translateObjectif->getTranslation(), 0.001f);
 
 			for (int i = 0; i < m_mapDOF.size(); i++)
 				m_mapDOF[i].first->setAngle(m_mapDOF[i].second->getDOF()[0]);

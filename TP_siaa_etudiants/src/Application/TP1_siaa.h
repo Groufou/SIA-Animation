@@ -69,7 +69,7 @@ namespace Application
 
 			m_root.addSon(m_musquito);
 
-			m_target = new HermiteTarget(HermiteSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, 1.0), Math::makeVector(3.0, 3.0, 3.0), Math::makeVector(-1.0, 0.0, 0.0)), 3);
+			m_target = new HermiteTarget(HermiteSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, 1.0), Math::makeVector(3.0, 3.0, 3.0), Math::makeVector(-1.0, 0.0, 0.0)));
 			m_target->addSpline(Math::makeVector(0.0, -2.0, -5.0), Math::makeVector(1.0, 0.0, 1.0));
 			m_target->addSpline(Math::makeVector(0.0, 0.0, 0.0), Math::makeVector(0.0, 0.0, -1.0));
 		}

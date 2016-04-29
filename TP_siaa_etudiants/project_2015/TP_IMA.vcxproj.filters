@@ -299,5 +299,8 @@
     <ClInclude Include="..\src\Animation\CyclicCoordinateDescent.h">
       <Filter>src\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="TP3_siaa.h">
+      <Filter>src\Application</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

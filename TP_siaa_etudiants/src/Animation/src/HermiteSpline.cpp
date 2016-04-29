@@ -45,6 +45,11 @@ Math::Vector<Math::Vector3f, 4> HermiteSpline::getSpline()
 	return m_spline;
 }
 
+void HermiteSpline::setSpline(Math::Vector<Math::Vector3f, 4> spline)
+{
+	m_spline = spline;
+}
+
 Math::Vector3f HermiteSpline::computePosition(double t)
 {
 	Math::Vector4f b;

@@ -14,5 +14,8 @@ public:
 
 	void convergeToward(Math::Vector3f objectif, float maxAngle);
 	bool solve(Math::Vector3f objectif, float maxAngl);
+
+protected:
+	void ccd(Math::Vector3f constraint, float maxAngle);
 };
 

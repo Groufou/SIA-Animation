@@ -24,6 +24,7 @@ public:
 	Math::Vector3f getSpeed();
 
 	Math::Vector<Math::Vector3f, 4> getSpline();
+	void setSpline(Math::Vector<Math::Vector3f, 4> spline);
 
 private:
 	void completeHermite(void);
