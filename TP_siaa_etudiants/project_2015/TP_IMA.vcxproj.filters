@@ -299,7 +299,10 @@
     <ClInclude Include="..\src\Animation\CyclicCoordinateDescent.h">
       <Filter>src\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="TP3_siaa.h">
+    <ClInclude Include="PonctualMass.h">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Application\TP3_siaa.h">
       <Filter>src\Application</Filter>
     </ClInclude>
   </ItemGroup>

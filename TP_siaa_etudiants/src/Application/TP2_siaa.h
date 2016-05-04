@@ -89,7 +89,7 @@ namespace Application
 			SceneGraph::Rotate * articulationRotationZ = new SceneGraph::Rotate(0.0f, Math::makeVector(0.0f, 0.0f, 1.0f));
 
 			SceneGraph::Translate * boneTranslation = new SceneGraph::Translate(Math::makeVector(0.20f,0.0f,0.0f));
-			SceneGraph::Rotate * boneRotation = new SceneGraph::Rotate(Math::pi/2, Math::makeVector(0.0f, 1.0f, 0.0f));
+			SceneGraph::Rotate * boneRotation = new SceneGraph::Rotate(Math::piDiv2, Math::makeVector(0.0f, 1.0f, 0.0f));
 
 			SceneGraph::Translate * rootTranslation = new SceneGraph::Translate(Math::makeVector(0.70f, 0.0f, 0.0f));
 

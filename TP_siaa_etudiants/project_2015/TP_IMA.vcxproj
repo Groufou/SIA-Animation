@@ -147,6 +147,7 @@ copy "$(ProjectDir)\..\..\dependencies_ima\lib2015\$(Configuration)\*.dll" "$(Ou
     <ClInclude Include="..\src\Application\TP1.h" />
     <ClInclude Include="..\src\Application\TP1_siaa.h" />
     <ClInclude Include="..\src\Application\TP2_siaa.h" />
+    <ClInclude Include="..\src\Application\TP3_siaa.h" />
     <ClInclude Include="..\src\Config.h" />
     <ClInclude Include="..\src\GL\compatibility.h" />
     <ClInclude Include="..\src\HelperGl\Buffer.h" />
@@ -192,7 +193,7 @@ copy "$(ProjectDir)\..\..\dependencies_ima\lib2015\$(Configuration)\*.dll" "$(Ou
     <ClInclude Include="..\src\SceneGraph\Translate.h" />
     <ClInclude Include="..\src\System\Path.h" />
     <ClInclude Include="..\src\Utils\History.h" />
-    <ClInclude Include="TP3_siaa.h" />
+    <ClInclude Include="PonctualMass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
